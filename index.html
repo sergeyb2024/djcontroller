@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web DJ Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="start-overlay">
+        <button id="start-button">Click to Start</button>
+    </div>
+
+    <div id="dj-controller" style="display: none;">
+        <div class="deck" id="deck-a">
+            <div class="transport-controls">
+                <label for="file-input-a" class="file-label">Load Track A</label>
+                <input type="file" id="file-input-a" class="file-loader" accept=".mp3,.wav">
+                <button id="play-cue-a" class="play-button">Play/Cue</button>
+            </div>
+            <div class="pad-section">
+                <p>Drum Machine A (4x4 Steps)</p>
+                <div id="drum-machine-a" class="pad-grid drum-grid"></div>
+            </div>
+            <div class="turntable-section">
+                <div id="turntable-a" class="turntable">
+                    <div class="spindle"></div>
+                </div>
+                <label for="rpm-a">RPM</label>
+                <input type="range" id="rpm-a" class="rpm-slider" min="0.5" max="1.5" value="1" step="0.01">
+            </div>
+            <div class="pad-section">
+                <p>Synth Melodies A (8x4 Steps)</p>
+                <div id="synth-melodies-a" class="pad-grid synth-grid"></div>
+            </div>
+        </div>
+
+        <div class="mixer" id="mixer">
+            <div class="mixer-title">MIXER</div>
+            <div class="master-controls">
+                <button id="master-play">Play Sequencers</button>
+                <button id="record-button">Record</button>
+                <a id="save-button" style="display:none;">Save MP3</a>
+            </div>
+            <div class="channel-strips">
+                <div class="channel-strip" id="channel-1">
+                    <p>Channel 1</p>
+                    <div class="eq-section">
+                        <label>High</label><input type="range" id="high-eq-a" class="knob" min="-24" max="12" value="0" step="1">
+                        <label>Mid</label><input type="range" id="mid-eq-a" class="knob" min="-24" max="12" value="0" step="1">
+                        <label>Low</label><input type="range" id="low-eq-a" class="knob" min="-24" max="12" value="0" step="1">
+                    </div>
+                    <div class="filter-section">
+                        <label>LPF</label><input type="range" id="lpf-a" class="knob" min="20" max="20000" value="20000" step="10">
+                        <label>HPF</label><input type="range" id="hpf-a" class="knob" min="20" max="20000" value="20" step="10">
+                    </div>
+                </div>
+                <div class="channel-strip" id="channel-2">
+                    <p>Channel 2</p>
+                    <div class="eq-section">
+                        <label>High</label><input type="range" id="high-eq-b" class="knob" min="-24" max="12" value="0" step="1">
+                        <label>Mid</label><input type="range" id="mid-eq-b" class="knob" min="-24" max="12" value="0" step="1">
+                        <label>Low</label><input type="range" id="low-eq-b" class="knob" min="-24" max="12" value="0" step="1">
+                    </div>
+                    <div class="filter-section">
+                        <label>LPF</label><input type="range" id="lpf-b" class="knob" min="20" max="20000" value="20000" step="10">
+                        <label>HPF</label><input type="range" id="hpf-b" class="knob" min="20" max="20000" value="20" step="10">
+                    </div>
+                </div>
+            </div>
+            <div class="crossfader-section">
+                <input type="range" id="crossfader" class="crossfader-slider" min="0" max="1" value="0.5" step="0.01">
+                <div class="crossfader-labels"><span>A</span><span>B</span></div>
+            </div>
+            <div class="effects-section">
+                <div class="effect-rack" id="effects-a">
+                    <p>Effects A</p>
+                    <label>Reverb</label><input type="range" class="effect-knob" data-effect="reverb" data-deck="a" min="0" max="1" value="0" step="0.01">
+                    <label>Flanger</label><input type="range" class="effect-knob" data-effect="flanger" data-deck="a" min="0" max="1" value="0" step="0.01">
+                    <label>Tremolo</label><input type="range" class="effect-knob" data-effect="tremolo" data-deck="a" min="0" max="1" value="0" step="0.01">
+                    <label>Chorus</label><input type="range" class="effect-knob" data-effect="chorus" data-deck="a" min="0" max="1" value="0" step="0.01">
+                    <label>Echo</label><input type="range" class="effect-knob" data-effect="echo" data-deck="a" min="0" max="1" value="0" step="0.01">
+                    <label>Pitch</label><input type="range" class="effect-knob" data-effect="pitch" data-deck="a" min="-12" max="12" value="0" step="1">
+                </div>
+                <div class="effect-rack" id="effects-b">
+                    <p>Effects B</p>
+                    <label>Reverb</label><input type="range" class="effect-knob" data-effect="reverb" data-deck="b" min="0" max="1" value="0" step="0.01">
+                    <label>Flanger</label><input type="range" class="effect-knob" data-effect="flanger" data-deck="b" min="0" max="1" value="0" step="0.01">
+                    <label>Tremolo</label><input type="range" class="effect-knob" data-effect="tremolo" data-deck="b" min="0" max="1" value="0" step="0.01">
+                    <label>Chorus</label><input type="range" class="effect-knob" data-effect="chorus" data-deck="b" min="0" max="1" value="0" step="0.01">
+                    <label>Echo</label><input type="range" class="effect-knob" data-effect="echo" data-deck="b" min="0" max="1" value="0" step="0.01">
+                    <label>Pitch</label><input type="range" class="effect-knob" data-effect="pitch" data-deck="b" min="-12" max="12" value="0" step="1">
+                </div>
+            </div>
+             <div class="headphone-section">
+                <p>Headphone Cue</p>
+                <button id="cue-a">Cue A</button>
+                <button id="cue-b">Cue B</button>
+                <button id="cue-bypass">Bypass</button>
+            </div>
+        </div>
+
+        <div class="deck" id="deck-b">
+            <div class="transport-controls">
+                <label for="file-input-b" class="file-label">Load Track B</label>
+                <input type="file" id="file-input-b" class="file-loader" accept=".mp3,.wav">
+                <button id="play-cue-b" class="play-button">Play/Cue</button>
+            </div>
+            <div class="pad-section">
+                <p>Drum Machine B (4x4 Steps)</p>
+                <div id="drum-machine-b" class="pad-grid drum-grid"></div>
+            </div>
+            <div class="turntable-section">
+                <div id="turntable-b" class="turntable">
+                    <div class="spindle"></div>
+                </div>
+                <label for="rpm-b">RPM</label>
+                <input type="range" id="rpm-b" class="rpm-slider" min="0.5" max="1.5" value="1" step="0.01">
+            </div>
+            <div class="pad-section">
+                <p>Synth Melodies B (8x4 Steps)</p>
+                <div id="synth-melodies-b" class="pad-grid synth-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="[https://unpkg.com/tone@14.7.77/build/Tone.js](https://unpkg.com/tone@14.7.77/build/Tone.js)"></script>
+    <script src="[https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js](https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js)"></script>
+    <script src="main.js"></script>
+</body>
+</html>
